@@ -1,0 +1,6 @@
+Version 1.8.1 - Updated: 14.07.2015
+================================================
+Added	:	Auto Update
+Added	:	Changelog file
+Added	:	Readme.txt file
+Added	:	github public repo https://github.com/tesla-themes/Tesla
