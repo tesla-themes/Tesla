@@ -48,7 +48,7 @@ else if ($_REQUEST[ 'settings-updated' ] == true)
     </ul>
   </div>
   <div class="tt_content">
-    <a class="tt_teslathemes" target="_blank" href="http://teslathemes.com/utm_source=banner&utm_medium=fw&utm_campaign=fw-tesla-free"></a>
+    <a class="tt_teslathemes" target="_blank" href="http://teslathemes.com/?utm_source=banner&utm_medium=fw&utm_campaign=fw-tesla-free"></a>
     <?php $j = 0 ;?>
 <!-- ========================================= TABS START ========================================================== -->
     <?php foreach ( $tabs as $key => $tab ) : ?>
