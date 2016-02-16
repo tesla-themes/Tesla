@@ -1,6 +1,6 @@
 <?php
 define('THEME_NAME', 'teslawp');
-define('THEME_VERSION', '1.0');
+define('THEME_VERSION', '1.8.3');
 define('THEME_PRETTY_NAME', 'Tesla');
 //Theme support
 add_theme_support('post-thumbnails');

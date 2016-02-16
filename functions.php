@@ -1429,17 +1429,17 @@ add_action('save_post', 'teslawp_disable_padding_save');
 
 class Tesla_Nav_Menu_Walker extends Walker_Nav_Menu {
 
-    function start_lvl( &$output, $depth = 0, $args = array() ) {
+    public function start_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent<div class=\"menuLevel\"><ul class=\"sub-menu menuDrop font3\">\n";
     }
 
-    function end_lvl( &$output, $depth = 0, $args = array() ) {
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul></div>\n";
     }
 
-    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+    public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
         $indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
         $class_names = $value = '';
@@ -1472,17 +1472,17 @@ class Tesla_Nav_Menu_Walker extends Walker_Nav_Menu {
 
 class Tesla_List_Pages_Walker extends Walker_Page {
 
-    function start_lvl( &$output, $depth = 0, $args = array() ) {
+    public function start_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat("\t", $depth);
         $output .= "\n$indent<div class=\"menuLevel\"><ul class='children menuDrop font3'>\n";
     }
 
-    function end_lvl( &$output, $depth = 0, $args = array() ) {
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
         $indent = str_repeat("\t", $depth);
         $output .= "$indent</ul></div>\n";
     }
 
-    function start_el( &$output, $page, $depth, $args, $current_page = 0 ) {
+    public function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) {
         if ( $depth )
             $indent = str_repeat("\t", $depth);
         else
@@ -1519,15 +1519,15 @@ class Tesla_List_Pages_Walker extends Walker_Page {
 
 class Tesla_Nav_Menu_Select_Walker extends Walker_Nav_Menu {
 
-    function start_lvl( &$output, $depth = 0, $args = array() ) {
+    public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
     }
 
-    function end_lvl( &$output, $depth = 0, $args = array() ) {
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
 
     }
 
-    function start_el(&$output, $item, $depth = 0, $args, $id = 0 ) {
+    public function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) {
         $pad = str_repeat('&nbsp;', $depth * 3);
 
         $output .= "\t<option class=\"level-$depth\" value=\"".$item->url."\"";
@@ -1538,22 +1538,22 @@ class Tesla_Nav_Menu_Select_Walker extends Walker_Nav_Menu {
         $output .= $pad . esc_html( $title );
     }
 
-    function end_el( &$output, $item, $depth = 0, $args ) {
+    public function end_el( &$output, $item, $depth = 0, $args = array() ) {
         $output .= "</option>\n";
     }
 }
 
 class Tesla_List_Pages_Select_Walker extends Walker_Page {
 
-    function start_lvl( &$output, $depth = 0, $args = array() ) {
+    public function start_lvl( &$output, $depth = 0, $args = array() ) {
         
     }
 
-    function end_lvl( &$output, $depth = 0, $args = array() ) {
+    public function end_lvl( &$output, $depth = 0, $args = array() ) {
         
     }
 
-    function start_el(&$output, $page, $depth = 0, $args, $id = 0 ) {
+    public function start_el( &$output, $page, $depth = 0, $args = array(), $current_page = 0 ) {
         $pad = str_repeat('&nbsp;', $depth * 3);
 
         $url = get_permalink($page->ID);
@@ -1566,7 +1566,7 @@ class Tesla_List_Pages_Select_Walker extends Walker_Page {
         $output .= $pad . esc_html( $title );
     }
 
-    function end_el( &$output, $page, $depth = 0, $args ) {
+    public function end_el( &$output, $item, $depth = 0, $args = array() ) {
         $output .= "</option>\n";
     }
 }
@@ -2087,3 +2087,26 @@ add_shortcode( 'teslawp_project_related_item', 'teslawp_project_related_item_sho
 /*============================== FORMATTING ======================================================================================================================*/
 
 remove_filter('the_content', 'wpautop');
+
+// ========================Notice GoPro=================================
+if(!get_transient( 'tt_gopro_notice_dismissed' )){
+    add_action( 'admin_notices', 'tt_purchase_notice' );
+    add_action( 'admin_footer' , 'tt_purchase_notice_script' );
+    add_action( 'wp_ajax_tt_dismiss_notice', 'tt_dismiss_notice_ajax' );
+}
+
+function tt_purchase_notice(){
+    echo "<div class='notice update-nag is-dismissible tt-purchase-notice'> <p>Are you stuck and feel limited within the Theme ? <a target='_blank' href='http://teslathemes.com/wp-themes/revoke/?utm_source=fw&utm_medium=fwbutton&utm_campaign=GoProTeslaNotWpOrg'>Go Pro</a> with <a target='_blank' href='http://teslathemes.com/wp-themes/revoke/?utm_source=fw&utm_medium=fwbutton&utm_campaign=GoProTeslaNotWpOrg'>Revoke</a> ( Premium version of Tesla ) or <a target='_blank' href='http://teslathemes.com/wp-themes/revoke/?utm_source=fw&utm_medium=fwbutton&utm_campaign=GoProTeslaNotWpOrg'>Revoke2</a> to unlock <b>Premium</b> Features & get <b>Professional Support</b></p></div>"; 
+}
+
+function tt_dismiss_notice_ajax(){
+    set_transient( 'tt_gopro_notice_dismissed' , true , 5 * DAY_IN_SECONDS );
+}
+
+function tt_purchase_notice_script(){ ?>    
+    <script type="text/javascript">jQuery('body').on('click','.tt-purchase-notice .notice-dismiss',function(){
+      jQuery.post(ajaxurl, {action:'tt_dismiss_notice'});
+    })</script>
+    <?php
+}
+//==========================GoPro End=======================

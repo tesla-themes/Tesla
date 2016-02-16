@@ -1,3 +1,11 @@
+Version 1.8.3 - Updated: 16.02.2016
+================================================
+Fixed	:	False positives from some AVs on name.png.shadow.png files
+
+Version 1.8.2 - Updated: 23.09.2015
+================================================
+Fixed	:	Walkers in WP 4.3
+
 Version 1.8.1 - Updated: 14.07.2015
 ================================================
 Added	:	Auto Update

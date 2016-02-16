@@ -19,41 +19,7 @@ jQuery(document).ready(function($) {
     $('.font_changer').on('change',function(){
         var apiUrl = [];
         var font;
-//        apiUrl.push('//fonts.googleapis.com/css?family=');
         font = $(this).val();
-//        apiUrl.push(font.family.replace(/ /g, '+'));
-//        if (contains('bold', font.variants)) {
-//          apiUrl.push(':');
-//          apiUrl.push('bold');
-//        }
-//        if (contains('greek', font.subsets)) {
-//          apiUrl.push('&subset=');
-//          apiUrl.push('greek');
-//        }
-//         url: '//fonts.googleapis.com/css?family=Anonymous+Pro:bold&subset=greek'
-//        var url = apiUrl.join('');
-//        console.log(url)
-//        $.getJSON( "http:" + url, function(data) {
-//              font = data
-//              console.log(font)
-//      }).fail(function() { console.log( "error" ); })
-      
-      //============================WebFont Loader
-//      WebFontConfig = {
-//            google: { families: [ 'Tangerine', 'Cantarell' ] }
-//          };
-//          (function() {
-//            var wf = document.createElement('script');
-//            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-//            wf.type = 'text/javascript';
-//            wf.async = 'true';
-//            wf.id = 'font_api';
-//            var s = document.getElementById('script');
-//            console.log(s)
-//            s.parentNode.insertBefore(wf, s);
-//          })();
-          
-        //==============================================
         $('body').append("<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=" + escape(font) +"' type='text/css' media='all' />");
         $(this).parents('.tt_content_box_content').find('.font_preview').css({'font-family':'"'+ font +'"'});
     }).each(function(endex,element){
@@ -72,11 +38,6 @@ jQuery(document).ready(function($) {
     $('.upload_image_button').on('click', function( event ){
         event.preventDefault();
         var button = $(this);
-        // If the media frame already exists, reopen it.
-//        if ( file_frame ) {
-//          file_frame.open();
-//          return;
-//        }
         
         // Create the media frame.
         file_frame = wp.media.frames.file_frame = wp.media({
@@ -243,19 +204,11 @@ jQuery(document).ready(function($) {
                   new google.maps.Point(0, 0),
                   new google.maps.Point(16.0, 34.0)
               );
-          var shadow_link = ($('.map-icon input[type=radio]:checked').val())? $('.map-icon input[type=radio]:checked').val() + '.shadow.png' : ""
-          var shadow = '';
-          if(shadow_link != '')
-              shadow = new google.maps.MarkerImage(shadow_link ,
-                  new google.maps.Size(51.0, 37.0),
-                  new google.maps.Point(0, 0),
-                  new google.maps.Point(16.0, 34.0)
-              );
+
           marker = new google.maps.Marker({
               draggable:true,
               animation: google.maps.Animation.DROP,
               icon:image,
-              shadow: shadow
           });
           //change marker icon on clik of radio button with icon--------------------------------------------------------
          $('.map-icon input[type=radio]').change(function(){
@@ -264,13 +217,7 @@ jQuery(document).ready(function($) {
                      new google.maps.Point(0, 0),
                      new google.maps.Point(16.0, 34.0)
                  );
-             var shadow = new google.maps.MarkerImage($(this).val() + '.shadow.png',
-                     new google.maps.Size(51.0, 37.0),
-                     new google.maps.Point(0, 0),
-                     new google.maps.Point(16.0, 34.0)
-                 );
              marker.setIcon(image);
-             marker.setShadow(shadow);
          });
           function initialize() {
             //init the map---------------------------------
@@ -326,20 +273,6 @@ jQuery(document).ready(function($) {
                 marker.setPosition(map.getCenter());
                 document.getElementById('marker-coords').value = map.getCenter().lat() + "," + map.getCenter().lng();
                 marker.setVisible(true);
-                
-                //Infoview----------------------
-//                var address = '';
-//                if (place.address_components) {
-//                  address = [
-//                    (place.address_components[0] && place.address_components[0].short_name || ''),
-//                    (place.address_components[1] && place.address_components[1].short_name || ''),
-//                    (place.address_components[2] && place.address_components[2].short_name || '')
-//                  ].join(' ');
-//                }
-//
-//                infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                //infowindow.open(map, marker);
-                //Infoview end-------------------
            });
            //Selecting the first option of autocomplete-----------------
             $("#map_search").focusin(function () {

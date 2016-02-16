@@ -30,7 +30,7 @@ else if ($_REQUEST[ 'settings-updated' ] == true)
     </div>
   </div>
   <div class="tt_sidebar">
-    <div class="tt_logo"><a href="http://www.teslathemes.com" target="_blank"></a></div>
+    <div class="tt_logo"><a href="http://www.teslathemes.com?utm_source=logo&utm_medium=fw&utm_campaign=fw-tesla-free" target="_blank"></a></div>
     <ul class="tt_left_menu" id="myTab">
     <?php foreach ( $tabs as $key => $tab ) : ?>
       <li
@@ -48,7 +48,7 @@ else if ($_REQUEST[ 'settings-updated' ] == true)
     </ul>
   </div>
   <div class="tt_content">
-    <a class="tt_teslathemes" target="_blank" href="http://teslathemes.com/"></a>
+    <a class="tt_teslathemes" target="_blank" href="http://teslathemes.com/utm_source=banner&utm_medium=fw&utm_campaign=fw-tesla-free"></a>
     <?php $j = 0 ;?>
 <!-- ========================================= TABS START ========================================================== -->
     <?php foreach ( $tabs as $key => $tab ) : ?>
